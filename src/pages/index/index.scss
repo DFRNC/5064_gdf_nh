@@ -1,0 +1,67 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+}
+
+
+.animation {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  opacity: 0;
+
+  .animation1 {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+}
+
+.active-links {
+  cursor: pointer;
+}
+
+#btnPopupHome,
+#btnPopupHome1,
+#btnSliderRight,
+#btnSliderHome,
+#btnSliderLeft {
+  cursor: pointer;
+}
+
+.animation-slider {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.swiper-slide {
+  width: 100%;
+  height: 50vh;
+
+  img {
+    display: flex;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+}
+
+.popupBtn {
+  position: fixed;
+  bottom: 20px;
+  display: flex;
+  height: 65px;
+  width: auto;
+  opacity: 0;
+  z-index: 5;
+}
