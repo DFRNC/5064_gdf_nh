@@ -12,9 +12,9 @@ import 'swiper/swiper-bundle.css';
  * ./img/test_svg/test.svg - path to svg in src
  */
 let svgContent =
-    require("!!svg-anim-loader?outImageUrl=./assets/img/&needContent=false&par='xMidYMid slice'&class='animation1'!./img/animation1.svg")
+    require("!!svg-anim-loader?outImageUrl=./assets/img/&needContent=false&par=''&class='animation1'!./img/animation1.svg")
 require("!!svg-anim-loader?outImageUrl=./assets/img/&needContent=false&par=''&class='popupBtn'!./img/popupBtn.svg")
-console.log(svgContent);
+// console.log(svgContent);
 
 document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener("load", (event) => {
@@ -44,10 +44,10 @@ document.addEventListener("DOMContentLoaded", function () {
             // { target: '#Callout12', link: 'https://www.google.com/', icon: '#btnColloutLink12' },
             // { target: '#Callout13', link: 'https://www.gov.uk/guidance/rapid-charging-fund',icon:'#' },
             { target: '#Callout14', popup2: '#popup_collout14', icon: '#btnColloutPopup14' },
-            { target: '#infographic1', slide: '.slide1', icon: '#btnColloutSLider1' },
-            { target: '#infographic2', slide: '.slide2', icon: '#btnColloutSLider2' },
-            { target: '#infographic3', slide: '.slide3', icon: '#btnColloutSLider3' },
-            { target: '#infographic4', slide: '.slide4', icon: '#btnColloutSLider4' },
+            { target: '#infographic1', slide: '.slide1', icon: '#btnColloutSLider1', slideIndex: 0 },
+            { target: '#infographic2', slide: '.slide2', icon: '#btnColloutSLider2', slideIndex: 1 },
+            { target: '#infographic3', slide: '.slide3', icon: '#btnColloutSLider3', slideIndex: 2 },
+            { target: '#infographic4', slide: '.slide4', icon: '#btnColloutSLider4', slideIndex: 3 },
         ]
         let calloutSubElements = [
             { target: '#popup_collout1-link1', btn: '#btn_collout1-link1', link: 'https://highways.sharepoint.com/:p:/s/CyberSecurityCentreofExcellence/EZXCZbhhcyVFr5lKX_ynQpIBuS14TCRey8vlRMSezsAXnw?e=gNQKgl' },
@@ -63,13 +63,13 @@ document.addEventListener("DOMContentLoaded", function () {
         ]
 
         var swiper = new Swiper(".swiper", {
-            loop: true,
+            // loop: true,
             // autoplay: true
             // allowTouchMove: false,
             navigation: {
                 nextEl: "#btnSliderRight",
                 prevEl: "#btnSliderLeft",
-            },
+            }
         })
 
         let animBtnPopup = [
@@ -93,7 +93,9 @@ document.addEventListener("DOMContentLoaded", function () {
         gsap.to(animBtnPopup, { repeat: -1, yoyo: true, stagger: { each: '0.05', from: 'random' }, transformOrigin: '50% 50%', scale: 0.12, duration: 0.4, ease: "sine.inOut" })
         gsap.set(animBtnPopup, { filter: 'drop-shadow(5px 5px 5px #222)' });
 
+
         calloutElements.forEach(function (elem, index, arr) {
+
             let targetElement = document.querySelector(elem.target);
             let iconElement = document.querySelector(elem.icon);
             let closeBtnSlider = document.querySelector('#btnSliderHome');
@@ -103,25 +105,22 @@ document.addEventListener("DOMContentLoaded", function () {
             if (elem.slide) {
                 gsap.set('.animation-slider', { autoAlpha: 0, pointerEvents: 'none' })
                 targetElement.addEventListener("click", function () {
-                    let slideIndex = document.querySelector(elem.slide).dataset.swiperSlideIndex;
-                    swiper.slideTo(slideIndex, 1);
-                    gsap.to('.animation-slider', { autoAlpha: 1, pointerEvents: 'all' })
-                    gsap.to('.animation1', { autoAlpha: 0 })
-                    gsap.to('.popupBtn', { autoAlpha: 1, pointerEvents: 'all' })
+                    swiper.slideTo(elem.slideIndex, 1);
+                    gsap.to('.animation-slider', { autoAlpha: 1, pointerEvents: 'all' });
+                    gsap.to('.animation1', { autoAlpha: 0 });
+                    gsap.to('.popupBtn', { autoAlpha: 1, pointerEvents: 'all' });
                 });
                 iconElement.addEventListener("click", function () {
-                    let slideIndex = document.querySelector(elem.slide).dataset.swiperSlideIndex;
-                    swiper.slideTo(slideIndex, 1);
-                    gsap.to('.animation-slider', { autoAlpha: 1, pointerEvents: 'all' })
-                    gsap.to('.animation1', { autoAlpha: 0 })
-                    gsap.to('.popupBtn', { autoAlpha: 1, pointerEvents: 'all' })
+                    swiper.slideTo(elem.slideIndex, 1);
+                    gsap.to('.animation-slider', { autoAlpha: 1, pointerEvents: 'all' });
+                    gsap.to('.animation1', { autoAlpha: 0 });
+                    gsap.to('.popupBtn', { autoAlpha: 1, pointerEvents: 'all' });
                 });
                 closeBtnSlider.addEventListener("click", function () {
-                    gsap.to('.animation-slider', { autoAlpha: 0, pointerEvents: 'none' })
-                    gsap.to('.animation1', { autoAlpha: 1 })
-                    gsap.to('.popupBtn', { autoAlpha: 0, pointerEvents: 'none' })
+                    gsap.to('.animation-slider', { autoAlpha: 0, pointerEvents: 'none' });
+                    gsap.to('.animation1', { autoAlpha: 1 });
+                    gsap.to('.popupBtn', { autoAlpha: 0, pointerEvents: 'none' });
                     gsap.set('#btnCollout', { autoAlpha: 1 });
-
                 });
             }
             if (elem.popup) {
@@ -228,6 +227,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         });
+
+
         document.querySelector('#Callout1').addEventListener("click", function () {
             gsap.set('#popup_collout1-link1', { autoAlpha: 0, pointerEvents: 'all' })
             gsap.set('#popup_collout1-link2', { autoAlpha: 0, pointerEvents: 'all' })
